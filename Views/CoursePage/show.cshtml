@@ -1,0 +1,17 @@
+﻿@model test1.Models.Course
+
+<h2 style="text-align:center;margin-bottom:2em;margin-top:2em;">Course Information</h2>
+<div class="card mb-3" style="max-width: 540px;margin:auto; ">
+    <div class="row g-0">
+        <div class="col-md-8">
+            <div class="card-body">
+                <p class="card-text"><strong>Course Name:</strong> @Model.coursename</p>
+                <p class="card-text"><strong>Course Code:</strong> @Model.Courseid </p>
+                <p class="card-text"><strong>Teacher's Code:</strong> @Model.Teacherid </p>
+                <p class="card-text"><strong>Teacher's Name:</strong> @Model.Teachername </p>
+                <p class="card-text"><strong>Start Date:</strong> @Model.Startdate </p>
+                <p class="card-text"><strong>Finish Date:</strong> @Model.Finishdate </p>
+            </div>
+        </div>
+    </div>
+</div>

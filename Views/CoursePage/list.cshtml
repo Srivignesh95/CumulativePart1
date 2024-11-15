@@ -1,0 +1,22 @@
+﻿@model IEnumerable<test1.Models.Course>
+<h2 style="text-align:center;margin-bottom:2em;margin-top:2em;"> Courses Details</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Course ID</th>
+            <th scope="col">Course Name</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (test1.Models.Course Course in Model)
+{
+            <tr>
+                <th scope="row">@Course.Courseid</th>
+                <td>@Course.coursename</td>
+                <td> <a href="/CoursePage/Show/@Course.Courseid">Show More</a></td>
+            </tr>
+}
+    </tbody>
+</table>

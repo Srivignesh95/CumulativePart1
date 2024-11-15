@@ -1,0 +1,24 @@
+﻿@model IEnumerable<test1.Models.Students>
+<h2 style="text-align:center;margin-bottom:2em;margin-top:2em;"> Students Details</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (test1.Models.Students students in Model)
+{
+            <tr>
+                <th scope="row">@students.Studentid</th>
+                <td>@students.Studentfname</td>
+                <td>@students.Studentlname</td>
+                <td> <a href="/StudentPage/Show/@students.Studentid">Show More</a></td>
+            </tr>
+}
+    </tbody>
+</table>
