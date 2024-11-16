@@ -5,9 +5,11 @@ namespace test1.Controllers
 {
     public class CoursePageController : Controller
     {
-        // currently relying on the API to retrieve author information
-        // this is a simplified example. In practice, both the AuthorAPI and AuthorPage controllers
-        // should rely on a unified "Service", with an explicit interface
+        // Currently relying on the API to retrieve course information.
+        // This is a simplified example. In a production environment, both the CourseAPI and 
+        // CoursePage controllers should rely on a unified "Service" layer with an explicit interface 
+        // to handle business logic and data retrieval.
+
         private readonly CourseAPIController _api;
 
         public CoursePageController(CourseAPIController api)

@@ -17,13 +17,13 @@ namespace test1.Controllers
 
 
         /// <summary>
-        /// Returns a list of Authors in the system
+        /// Returns a list of courses in the system along with their associated teacher names.
         /// </summary>
         /// <example>
-        /// GET api/Author/ListAuthors -> [{"AuthorId":1,"AuthorFname":"Brian", "AuthorLName":"Smith"},{"AuthorId":2,"AuthorFname":"Jillian", "AuthorLName":"Montgomery"},..]
+        /// GET api/Course/ListCourse -> [{"CourseId":1,"CourseCode":"CS101","TeacherId":3,"StartDate":"2023-01-01","FinishDate":"2023-06-01","CourseName":"Introduction to Programming","TeacherName":"John Doe"},...]
         /// </example>
         /// <returns>
-        /// A list of author objects 
+        /// A list of course objects including course details and the teacher's full name.
         /// </returns>
         [HttpGet]
         [Route(template: "ListCourse")]
@@ -57,13 +57,7 @@ namespace test1.Controllers
                         CurrentCourse.Finishdate = (ResultSet["finishdate"].ToString());
                         CurrentCourse.coursename = (ResultSet["coursename"].ToString());
                         CurrentCourse.Teachername = (ResultSet["Techername"].ToString());
-
-
-
-
-                        //short form for setting all properties while creating the object
-                        //Teacher CurrentTeacher = new Teacher();
-
+                        // Add the current course to the list
                         Course_list.Add(CurrentCourse);
 
                     }
@@ -75,30 +69,30 @@ namespace test1.Controllers
             return Course_list;
         }
         /// <summary>
-        /// Returns an author in the database by their ID
+        /// Returns a course in the database by its ID along with the associated teacher name.
         /// </summary>
         /// <example>
-        /// GET api/Author/FindAuthor/3 -> {"AuthorId":3,"AuthorFname":"Sam","AuthorLName":"Cooper"}
+        /// GET api/Course/FindCourse/1 -> {"CourseId":1,"CourseCode":"CS101","TeacherId":3,"StartDate":"2023-01-01","FinishDate":"2023-06-01","CourseName":"Introduction to Programming","TeacherName":"John Doe"}
         /// </example>
         /// <returns>
-        /// A matching author object by its ID. Empty object if Author not found
+        /// A course object matching the given ID. Returns an empty object if the course is not found.
         /// </returns>
         [HttpGet]
         [Route(template: "FindCourse/{id}")]
         public Course FindCourse(int id)
         {
 
-            //Empty Author
+            // Create an empty course object
             Course CurrentCourse = new Course();
 
-            // 'using' will close the connection after the code executes
+            // 'using' ensures the database connection is properly closed after execution
             using (MySqlConnection Connection = _context.AccessDatabase())
             {
                 Connection.Open();
-                //Establish a new command (query) for our database
+                // Establish a new command (query) for the database
                 MySqlCommand Command = Connection.CreateCommand();
 
-                // @id is replaced with a 'sanitized' id
+                // SQL query to retrieve course information and teacher name by course ID
                 Command.CommandText = "SELECT c.*, CONCAT( t.teacherfname,' ', t.teacherlname) AS Techername FROM courses c JOIN teachers t ON c.teacherid = t.teacherid where courseid=@id;";
                 Command.Parameters.AddWithValue("@id", id);
 

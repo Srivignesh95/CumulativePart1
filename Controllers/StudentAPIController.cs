@@ -17,13 +17,13 @@ namespace test1.Controllers
 
 
         /// <summary>
-        /// Returns a list of Authors in the system
+        /// Returns a list of students in the system.
         /// </summary>
         /// <example>
-        /// GET api/Author/ListAuthors -> [{"AuthorId":1,"AuthorFname":"Brian", "AuthorLName":"Smith"},{"AuthorId":2,"AuthorFname":"Jillian", "AuthorLName":"Montgomery"},..]
+        /// GET api/Students/ListStudents -> [{"Studentid":1,"Studentfname":"Brian", "Studentlname":"Smith"},{"Studentid":2,"Studentfname":"Jillian", "Studentlname":"Montgomery"},..]
         /// </example>
         /// <returns>
-        /// A list of author objects 
+        /// A list of student objects.
         /// </returns>
         [HttpGet]
         [Route(template: "ListStudents")]
@@ -56,11 +56,7 @@ namespace test1.Controllers
                         CurrentStudents.Studentnumber = (ResultSet["studentnumber"].ToString());
                         CurrentStudents.Enroledate = (ResultSet["enroldate"].ToString());
 
-
-
-                        //short form for setting all properties while creating the object
-                        //Teacher CurrentTeacher = new Teacher();
-
+                        // Add the current student to the list
                         Students_list.Add(CurrentStudents);
 
                     }
@@ -68,24 +64,24 @@ namespace test1.Controllers
             }
 
 
-            //Return the final list of authors
+            // Return the final list of students
             return Students_list;
         }
         /// <summary>
-        /// Returns an author in the database by their ID
+        /// Returns a student in the database by their ID along with enrolled courses.
         /// </summary>
         /// <example>
-        /// GET api/Author/FindAuthor/3 -> {"AuthorId":3,"AuthorFname":"Sam","AuthorLName":"Cooper"}
+        /// GET api/Students/FindStudent/3 -> {"Studentid":3,"Studentfname":"Sam","Studentlname":"Cooper", "Coursesname":["Math", "Science"]}
         /// </example>
         /// <returns>
-        /// A matching author object by its ID. Empty object if Author not found
+        /// A matching student object by its ID. Returns a student object with "No program enrolled" if no courses are associated.
         /// </returns>
         [HttpGet]
         [Route(template: "FindStudent/{id}")]
         public Students FindStudent(int id)
         {
 
-            //Empty Author
+            // Create an empty student object
             Students CurrentStudents = new Students();
 
             // 'using' will close the connection after the code executes
@@ -117,7 +113,7 @@ namespace test1.Controllers
             }
 
 
-            //Return the final list of author names
+            // Return the student object with associated courses
             return CurrentStudents;
         }
     }

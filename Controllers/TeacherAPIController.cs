@@ -17,13 +17,13 @@ namespace test1.Controllers
 
 
         /// <summary>
-        /// Returns a list of Authors in the system
+        /// Returns a list of Teachers in the system.
         /// </summary>
         /// <example>
-        /// GET api/Author/ListAuthors -> [{"AuthorId":1,"AuthorFname":"Brian", "AuthorLName":"Smith"},{"AuthorId":2,"AuthorFname":"Jillian", "AuthorLName":"Montgomery"},..]
+        /// GET api/Teacher/ListTeacher -> [{"Teacherid":1,"Teacherfname":"Brian", "Teacherlname":"Smith"},{"Teacherid":2,"Teacherfname":"Jillian", "Teacherlname":"Montgomery"},..]
         /// </example>
         /// <returns>
-        /// A list of author objects 
+        /// A list of teacher objects.
         /// </returns>
         [HttpGet]
         [Route(template: "ListTeacher")]
@@ -32,17 +32,15 @@ namespace test1.Controllers
             // Create an empty list of Teacher
             List<Teacher> Teacher_list = new List<Teacher>();
 
-            // 'using' will close the connection after the code executes
+            // 'using' will automatically close the connection after the code block
             using (MySqlConnection Connection = _context.AccessDatabase())
             {
                 Connection.Open();
-                //Establish a new command (query) for our database
+                // Query to select all teachers
                 MySqlCommand Command = Connection.CreateCommand();
-
-                //SQL QUERY
                 Command.CommandText = "select * from teachers";
 
-                // Gather Result Set of Query into a variable
+                // Execute query and process result
                 using (MySqlDataReader ResultSet = Command.ExecuteReader())
                 {
                     //Loop Through Each Row the Result Set
@@ -56,12 +54,6 @@ namespace test1.Controllers
                         CurrentTeacher.Employeenumber = (ResultSet["employeenumber"].ToString());
                         CurrentTeacher.Hiredate = (ResultSet["hiredate"].ToString());
                         CurrentTeacher.Salary = Convert.ToDecimal(ResultSet["salary"]);
-
-
-
-                        //short form for setting all properties while creating the object
-                        //Teacher CurrentTeacher = new Teacher();
-
                         Teacher_list.Add(CurrentTeacher);
 
                     }
@@ -69,24 +61,24 @@ namespace test1.Controllers
             }
 
 
-            //Return the final list of authors
+            //Return the final list of List
             return Teacher_list;
         }
         /// <summary>
-        /// Returns an author in the database by their ID
+        /// Returns a teacher and their assigned courses by teacher ID.
         /// </summary>
         /// <example>
-        /// GET api/Author/FindAuthor/3 -> {"AuthorId":3,"AuthorFname":"Sam","AuthorLName":"Cooper"}
+        /// GET api/Teacher/FindTeacher/3 -> {"Teacherid":3,"Teacherfname":"Sam","Teacherlname":"Cooper", "Coursenames":["Math", "Science"]}
         /// </example>
         /// <returns>
-        /// A matching author object by its ID. Empty object if Author not found
+        /// A teacher object with a list of course names.
         /// </returns>
         [HttpGet]
         [Route(template: "FindTeacher/{id}")]
         public Teacher FindTeacher(int id)
         {
 
-            //Empty Author
+            //Empty Teacher
             Teacher CurrentTeacher = new Teacher();
 
             // 'using' will close the connection after the code executes

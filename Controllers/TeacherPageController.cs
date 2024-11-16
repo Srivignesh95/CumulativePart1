@@ -5,9 +5,10 @@ namespace test1.Controllers
 {
     public class TeacherPageController : Controller
     {
-        // currently relying on the API to retrieve author information
-        // this is a simplified example. In practice, both the AuthorAPI and AuthorPage controllers
-        // should rely on a unified "Service", with an explicit interface
+        // Currently relying on the API to retrieve teacher information.
+        // This is a simplified example. In practice, both the TeacherAPI and TeacherPage controllers
+        // should rely on a unified "Service" layer, with an explicit interface for better modularity and maintainability.
+
         private readonly TeacherAPIController _api;
 
         public TeacherPageController(TeacherAPIController api)

@@ -4,22 +4,22 @@ namespace test1.Models
 {
     public class SchoolDB
     {
-        //These are readonly "secret" properties. 
-        //Only the BlogDbContext class can use them.
-        //Change these to match your own local blog database!
+        // These are readonly "secret" properties. 
+        // Only the SchoolDB class can use them.
+        // Change these to match your own local school database configuration!
         private static string User { get { return "root"; } }
         private static string Password { get { return ""; } }
         private static string Database { get { return "school"; } }
         private static string Server { get { return "localhost"; } }
         private static string Port { get { return "3306"; } }
 
-        //ConnectionString is a series of credentials used to connect to the database.
+        // ConnectionString is a series of credentials used to connect to the database.
         protected static string ConnectionString
         {
             get
             {
-                //convert zero datetime is a db connection setting which returns NULL if the date is 0000-00-00
-                //this can allow C# to have an easier interpretation of the date (no date instead of 0 BCE)
+                // "convert zero datetime" is a database connection setting that returns NULL if the date is 0000-00-00.
+                // This allows C# to interpret the absence of a date as NULL instead of an invalid date.
 
                 return "server = " + Server
                     + "; user = " + User
@@ -29,13 +29,13 @@ namespace test1.Models
                     + "; convert zero datetime = True";
             }
         }
-        //This is the method we actually use to get the database!
+        // This is the method we actually use to get the database connection!
         /// <summary>
-        /// Returns a connection to the blog database.
+        /// Returns a connection to the school database.
         /// </summary>
         /// <example>
-        /// private BlogDbContext Blog = new BlogDbContext();
-        /// MySqlConnection Conn = Blog.AccessDatabase();
+        /// private SchoolDB School = new SchoolDB();
+        /// MySqlConnection Conn = School.AccessDatabase();
         /// </example>
         /// <returns>A MySqlConnection Object</returns>
         public MySqlConnection AccessDatabase()
