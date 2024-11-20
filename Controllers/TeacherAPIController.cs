@@ -89,7 +89,7 @@ namespace test1.Controllers
                 MySqlCommand Command = Connection.CreateCommand();
 
                 // @id is replaced with a 'sanitized' id
-                Command.CommandText = "SELECT teachers.teacherid, teachers.teacherfname, teachers.teacherlname, teachers.employeenumber, teachers.hiredate, teachers.salary, courses.courseid, courses.coursecode, courses.coursename, courses.startdate, courses.finishdate FROM teachers INNER JOIN courses ON teachers.teacherid = courses.teacherid WHERE teachers.teacherid = @id;";
+                Command.CommandText = "SELECT t.teacherid, t.teacherfname, t.teacherlname, t.employeenumber, t.hiredate, t.salary, c.courseid, c.coursecode, CASE WHEN c.coursename IS NULL THEN 'No courses assigned' ELSE c.coursename END AS coursename, c.startdate, c.finishdate FROM teachers t LEFT JOIN courses c ON t.teacherid = c.teacherid WHERE t.teacherid = @id";
 
                 Command.Parameters.AddWithValue("@id", id);
 
@@ -105,7 +105,14 @@ namespace test1.Controllers
                         CurrentTeacher.Employeenumber = (ResultSet["employeenumber"].ToString());
                         CurrentTeacher.Hiredate = (ResultSet["hiredate"].ToString());
                         CurrentTeacher.Salary = Convert.ToDecimal(ResultSet["salary"]);
-                        CurrentTeacher.Coursename.Add(ResultSet["coursename"].ToString());
+                        //CurrentTeacher.Coursename.Add(ResultSet["coursename"].ToString());
+                        Course CurrentCourse = new Course
+                    {
+                        coursename = ResultSet["coursename"].ToString(),
+                    };
+
+                    // Add the course to the teacher's course list
+                    CurrentTeacher.Coursename.Add(CurrentCourse);
 
                     }
                     

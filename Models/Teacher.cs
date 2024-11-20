@@ -8,6 +8,6 @@
         public string Employeenumber { get; set; }
         public string Hiredate { get; set; }
         public decimal Salary { get; set; }
-        public List<string> Coursename { get; set; } = new List<string>();
+        public List<Course> Coursename { get; set; } = new List<Course>();
     }
 }

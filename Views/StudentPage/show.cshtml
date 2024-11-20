@@ -13,7 +13,7 @@
                     <strong>Courses Enrolled in:</strong>
                     @foreach (var courses in Model.Coursesname)
                     {
-                        <li>@courses</li>
+                        <li>@courses.coursename</li>
                     }
                 </p>
                 <p class="card-text"><small class="text-muted">Joining Date: @Model.Enroledate</small></p>

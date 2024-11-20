@@ -106,7 +106,14 @@ namespace test1.Controllers
                         CurrentStudents.Studentlname = (ResultSet["studentlname"].ToString());
                         CurrentStudents.Studentnumber = (ResultSet["studentnumber"].ToString());
                         CurrentStudents.Enroledate = (ResultSet["enroldate"].ToString());
-                        CurrentStudents.Coursesname.Add(ResultSet["coursename"].ToString());
+                        //CurrentStudents.Coursesname.Add(ResultSet["coursename"].ToString());
+                        Course CurrentCourse = new Course
+                        {
+                            coursename = ResultSet["coursename"].ToString(),
+                        };
+
+                        // Add the course to the teacher's course list
+                        CurrentStudents.Coursesname.Add(CurrentCourse);
 
                     }
                 }

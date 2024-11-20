@@ -7,6 +7,6 @@
         public string Studentlname { get; set; }
         public string Studentnumber { get; set; }
         public string Enroledate { get; set; }
-        public List<string> Coursesname { get; set; } = new List<string>();
+        public List<Course> Coursesname { get; set; } = new List<Course>();
     }
 }
