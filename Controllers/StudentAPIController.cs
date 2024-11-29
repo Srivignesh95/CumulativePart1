@@ -123,5 +123,79 @@ namespace test1.Controllers
             // Return the student object with associated courses
             return CurrentStudents;
         }
+        /// <summary>
+        /// Adds an author to the database
+        /// </summary>
+        /// <param name="AuthorData">Author Object</param>
+        /// <example>
+        /// POST: api/AuthorData/AddAuthor
+        /// Headers: Content-Type: application/json
+        /// Request Body:
+        /// {
+        ///	    "AuthorFname":"Christine",
+        ///	    "AuthorLname":"Bittle",
+        ///	    "AuthorBio":"Likes Coding!",
+        ///	    "AuthorEmail":"christine@test.ca"
+        /// } -> 409
+        /// </example>
+        /// <returns>
+        /// The inserted Author Id from the database if successful. 0 if Unsuccessful
+        /// </returns>
+        [HttpPost(template: "AddStudent")]
+        public int AddStudent([FromBody] Students StudentData)
+        {
+            // 'using' will close the connection after the code executes
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
+                //Establish a new command (query) for our database
+                MySqlCommand Command = Connection.CreateCommand();
+
+                // CURRENT_DATE() for the author join date in this context
+                // Other contexts the join date may be an input criteria!
+                Command.CommandText = "insert into students (studentfname, studentlname, studentnumber, enroldate) values (@studentfname, @studentlname, @studentnumber, @enroldate )";
+                Command.Parameters.AddWithValue("@studentfname", StudentData.Studentfname);
+                Command.Parameters.AddWithValue("@studentlname", StudentData.Studentlname);
+                Command.Parameters.AddWithValue("@studentnumber", StudentData.Studentnumber);
+                Command.Parameters.AddWithValue("@enroldate", StudentData.Enroledate);
+
+                Command.ExecuteNonQuery();
+
+                return Convert.ToInt32(Command.LastInsertedId);
+
+            }
+            // if failure
+            return 0;
+        }
+        /// <summary>
+        /// Deletes an Author from the database
+        /// </summary>
+        /// <param name="AuthorId">Primary key of the author to delete</param>
+        /// <example>
+        /// DELETE: api/AuthorData/DeleteAuthor -> 1
+        /// </example>
+        /// <returns>
+        /// Number of rows affected by delete operation.
+        /// </returns>
+        [HttpDelete(template: "DeleteStudent/{StudentId}")]
+        public int DeleteStudent(int StudentId)
+        {
+            // 'using' will close the connection after the code executes
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
+                //Establish a new command (query) for our database
+                MySqlCommand Command = Connection.CreateCommand();
+
+
+                Command.CommandText = "DELETE FROM students WHERE studentid = @id";
+                Command.Parameters.AddWithValue("@id", StudentId);
+                //return Command.ExecuteNonQuery();
+                int rowsAffected = Command.ExecuteNonQuery(); // Returns 1 if successful, 0 if not
+                return rowsAffected;
+            }
+            // if failure
+            return 0;
+        }
     }
 }

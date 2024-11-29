@@ -27,5 +27,42 @@ namespace test1.Controllers
             Students SelectedStudent = _api.FindStudent(id);
             return View(SelectedStudent);
         }
+        // GET : AuthorPage/New
+        [HttpGet]
+        public IActionResult New(int id)
+        {
+            return View();
+        }
+
+        // POST: AuthorPage/Create
+        [HttpPost]
+        public IActionResult Create(Students NewStudent)
+        {
+            int StudentId = _api.AddStudent(NewStudent);
+
+            // redirects to "Show" action on "Author" cotroller with id parameter supplied
+            return RedirectToAction("Show", new { id = StudentId });
+        }
+        // GET : AuthorPage/DeleteConfirm/{id}
+        [HttpGet]
+        public IActionResult DeleteConfirm(int id)
+        {
+            Students SelectedStudent = _api.FindStudent(id);
+            return View(SelectedStudent);
+        }
+
+        // POST: AuthorPage/Delete/{id}
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            int StudentId = _api.DeleteStudent(id);
+            // redirects to list action
+            if (StudentId == 0)
+            {
+                TempData["Error"] = "The Student you tried to delete does not exist.";
+                return RedirectToAction("DeleteConfirm", new { id = id });
+            }
+            return RedirectToAction("List");
+        }
     }
 }

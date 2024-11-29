@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MySqlX.XDevAPI.Common;
 using test1.Models;
 
 namespace test1.Controllers
@@ -24,6 +25,43 @@ namespace test1.Controllers
         {
             Teacher SelectedTeacher = _api.FindTeacher(id);
             return View(SelectedTeacher);
+        }
+        // GET : AuthorPage/New
+        [HttpGet]
+        public IActionResult New(int id)
+        {
+            return View();
+        }
+
+        // POST: AuthorPage/Create
+        [HttpPost]
+        public IActionResult Create(Teacher NewTeacher)
+        {
+            int TeacherId = _api.AddTeacher(NewTeacher);
+
+            // redirects to "Show" action on "Author" cotroller with id parameter supplied
+            return RedirectToAction("Show", new { id = TeacherId });
+        }
+        // GET : AuthorPage/DeleteConfirm/{id}
+        [HttpGet]
+        public IActionResult DeleteConfirm(int id)
+        {
+            Teacher SelectedTeacher = _api.FindTeacher(id);
+            return View(SelectedTeacher);
+        }
+
+        // POST: AuthorPage/Delete/{id}
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            int AuthorId = _api.DeleteTeacher(id);
+            // redirects to list action
+            if (AuthorId == 0)
+            {
+                TempData["Error"] = "The teacher you tried to delete does not exist.";
+                return RedirectToAction("DeleteConfirm", new { id = id });
+            }
+            return RedirectToAction("List");
         }
     }
 }

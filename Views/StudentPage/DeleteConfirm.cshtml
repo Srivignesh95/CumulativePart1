@@ -1,0 +1,24 @@
+﻿@model test1.Models.Students
+
+<div id="containershow" class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h2 class="card-title text-danger text-center">Delete Confirmation</h2>
+            <p class="text-center">
+                Are you sure you want to delete
+                <span class="fw-bold">@Model.Studentfname @Model.Studentlname</span>?
+            </p>
+            <p class="text-center text-muted">This action cannot be undone.</p>
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger text-center" role="alert">
+                    @TempData["Error"]
+                </div>
+            }
+            <form method="POST" action="/StudentPage/Delete/@Model.Studentid" class="text-center">
+                <button type="submit" class="btn btn-danger me-2">Confirm Delete</button>
+                <a class="btn btn-secondary" href="/StudentPage/Show/@Model.Studentid">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

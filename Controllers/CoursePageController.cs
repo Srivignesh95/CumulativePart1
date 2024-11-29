@@ -26,5 +26,42 @@ namespace test1.Controllers
             Course SelectedCourse = _api.FindCourse(id);
             return View(SelectedCourse);
         }
+        // GET : AuthorPage/New
+        [HttpGet]
+        public IActionResult New(int id)
+        {
+            return View();
+        }
+
+        // POST: AuthorPage/Create
+        [HttpPost]
+        public IActionResult Create(Course NewCourse)
+        {
+            int CourseId = _api.AddCourse(NewCourse);
+
+            // redirects to "Show" action on "Author" cotroller with id parameter supplied
+            return RedirectToAction("Show", new { id = CourseId });
+        }
+        // GET : AuthorPage/DeleteConfirm/{id}
+        [HttpGet]
+        public IActionResult DeleteConfirm(int id)
+        {
+            Course SelectedCourse = _api.FindCourse(id);
+            return View(SelectedCourse);
+        }
+
+        // POST: AuthorPage/Delete/{id}
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            int CourseId = _api.DeleteCourse(id);
+            // redirects to list action
+            if (CourseId == 0)
+            {
+                TempData["Error"] = "The Course you tried to delete does not exist.";
+                return RedirectToAction("DeleteConfirm", new { id = id });
+            }
+            return RedirectToAction("List");
+        }
     }
 }

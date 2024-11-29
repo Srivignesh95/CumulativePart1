@@ -1,0 +1,43 @@
+﻿<div id="containershow" class="container mt-5">
+    <nav class="mb-4">
+        <a class="btn btn-primary" href="/CoursePage/List">Back To Courses</a>
+    </nav>
+    <h2 class="mb-4">New Course</h2>
+    <form method="POST" action="/CoursePage/Create">
+        <div class="row mb-3">
+            <label for="Coursecode" class="col-sm-2 col-form-label">Course Code:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Coursecode" name="Coursecode" class="form-control" placeholder="Enter course code" required />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Teacherid" class="col-sm-2 col-form-label">Teacher ID:</label>
+            <div class="col-sm-10">
+                <input type="number" id="Teacherid" name="Teacherid" class="form-control" placeholder="Enter teacher ID" required />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Startdate" class="col-sm-2 col-form-label">Start Date:</label>
+            <div class="col-sm-10">
+                <input type="date" id="Startdate" name="Startdate" class="form-control" required />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Finishdate" class="col-sm-2 col-form-label">Finish Date:</label>
+            <div class="col-sm-10">
+                <input type="date" id="Finishdate" name="Finishdate" class="form-control" required />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Coursename" class="col-sm-2 col-form-label">Course Name:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Coursename" name="Coursename" class="form-control" placeholder="Enter course name" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 offset-sm-2">
+                <input type="submit" value="Create Course" class="btn btn-success w-100" />
+            </div>
+        </div>
+    </form>
+</div>

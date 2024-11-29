@@ -1,0 +1,43 @@
+﻿<div id="containershow" class="container mt-5">
+    <nav class="mb-4">
+        <a class="btn btn-primary" href="/TeacherPage/List">Back To Teachers</a>
+    </nav>
+    <h2 class="mb-4">New Teacher</h2>
+    <form method="POST" action="/TeacherPage/Create">
+        <div class="row mb-3">
+            <label for="Teacherfname" class="col-sm-2 col-form-label">First Name:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Teacherfname" name="Teacherfname" class="form-control" placeholder="Enter first name" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Teacherlname" class="col-sm-2 col-form-label">Last Name:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Teacherlname" name="Teacherlname" class="form-control" placeholder="Enter last name" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Employeenumber" class="col-sm-2 col-form-label">Employee Number:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Employeenumber" name="Employeenumber" class="form-control" placeholder="Enter employee number" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Hiredate" class="col-sm-2 col-form-label">Hire Date:</label>
+            <div class="col-sm-10">
+                <input type="date" id="Hiredate" name="Hiredate" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="Salary" class="col-sm-2 col-form-label">Salary:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Salary" name="Salary" class="form-control" placeholder="Enter salary amount" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 offset-sm-2">
+                <input type="submit" value="Create Teacher" class="btn btn-success w-100" />
+            </div>
+        </div>
+    </form>
+</div>

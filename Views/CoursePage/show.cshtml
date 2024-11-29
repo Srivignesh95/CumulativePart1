@@ -1,5 +1,6 @@
 ﻿@model test1.Models.Course
-
+@if (Model.Courseid > 0)
+{
 <h2 style="text-align:center;margin-bottom:2em;margin-top:2em;">Course Information</h2>
 <div class="card mb-3" style="max-width: 540px;margin:auto; ">
     <div class="row g-0">
@@ -11,7 +12,17 @@
                 <p class="card-text"><strong>Teacher's Name:</strong> @Model.Teachername </p>
                 <p class="card-text"><strong>Start Date:</strong> @Model.Startdate </p>
                 <p class="card-text"><strong>Finish Date:</strong> @Model.Finishdate </p>
+                <a href="/CoursePage/List" class="btn btn-secondary me-2">Back to List</a> <a class="btn btn-danger" href="/CoursePage/DeleteConfirm/@Model.Courseid">Delete</a>
             </div>
         </div>
     </div>
 </div>
+}else
+{
+    <div class="alert alert-danger text-center" role="alert">
+        The Course you are looking for is not available.
+    </div>
+    <div style="text-align: center; margin-top: 1em;">
+        <a href="/CoursePage/List" class="btn btn-secondary">Back to List</a>
+    </div>
+}
