@@ -119,22 +119,24 @@ namespace test1.Controllers
             return CurrentCourse;
         }
         /// <summary>
-        /// Adds an author to the database
+        /// Adds a new course to the database.
         /// </summary>
-        /// <param name="AuthorData">Author Object</param>
+        /// <param name="CourseData">Course object containing course details to be added.</param>
         /// <example>
-        /// POST: api/AuthorData/AddAuthor
+        /// POST: api/Course/AddCourse
         /// Headers: Content-Type: application/json
         /// Request Body:
         /// {
-        ///	    "AuthorFname":"Christine",
-        ///	    "AuthorLname":"Bittle",
-        ///	    "AuthorBio":"Likes Coding!",
-        ///	    "AuthorEmail":"christine@test.ca"
-        /// } -> 409
+        ///     "CourseCode": "CS102",
+        ///     "TeacherId": 2,
+        ///     "StartDate": "2023-09-01",
+        ///     "FinishDate": "2024-01-31",
+        ///     "CourseName": "Advanced Programming"
+        /// } 
+        /// -> 12
         /// </example>
         /// <returns>
-        /// The inserted Author Id from the database if successful. 0 if Unsuccessful
+        /// The ID of the inserted course if successful. Returns 0 if the operation fails.
         /// </returns>
         [HttpPost(template: "AddCourse")]
         public int AddCourse([FromBody] Course CourseData)
@@ -164,14 +166,14 @@ namespace test1.Controllers
             return 0;
         }
         /// <summary>
-        /// Deletes an Author from the database
+        /// Deletes a course from the database by its ID.
         /// </summary>
-        /// <param name="AuthorId">Primary key of the author to delete</param>
+        /// <param name="CourseId">Primary key of the course to delete.</param>
         /// <example>
-        /// DELETE: api/AuthorData/DeleteAuthor -> 1
+        /// DELETE: api/Course/DeleteCourse/1 -> 1
         /// </example>
         /// <returns>
-        /// Number of rows affected by delete operation.
+        /// The number of rows affected by the delete operation. Returns 1 if successful, 0 otherwise.
         /// </returns>
         [HttpDelete(template: "DeleteCourse/{CourseId}")]
         public int DeleteCourse(int CourseId)

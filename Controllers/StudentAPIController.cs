@@ -124,22 +124,22 @@ namespace test1.Controllers
             return CurrentStudents;
         }
         /// <summary>
-        /// Adds an author to the database
+        /// Adds a new student to the database.
         /// </summary>
-        /// <param name="AuthorData">Author Object</param>
+        /// <param name="StudentData">Student object containing details to be added.</param>
         /// <example>
-        /// POST: api/AuthorData/AddAuthor
+        /// POST: api/Students/AddStudent
         /// Headers: Content-Type: application/json
         /// Request Body:
         /// {
-        ///	    "AuthorFname":"Christine",
-        ///	    "AuthorLname":"Bittle",
-        ///	    "AuthorBio":"Likes Coding!",
-        ///	    "AuthorEmail":"christine@test.ca"
-        /// } -> 409
+        ///	    "Studentfname":"John",
+        ///	    "Studentlname":"Doe",
+        ///	    "Studentnumber":"T12345",
+        ///	    "Enroldate":"2024-01-01"
+        /// } -> Returns the ID of the added student.
         /// </example>
         /// <returns>
-        /// The inserted Author Id from the database if successful. 0 if Unsuccessful
+        /// The inserted Student ID from the database if successful, or 0 if unsuccessful.
         /// </returns>
         [HttpPost(template: "AddStudent")]
         public int AddStudent([FromBody] Students StudentData)
@@ -168,14 +168,14 @@ namespace test1.Controllers
             return 0;
         }
         /// <summary>
-        /// Deletes an Author from the database
+        /// Deletes a student from the database by their ID.
         /// </summary>
-        /// <param name="AuthorId">Primary key of the author to delete</param>
+        /// <param name="StudentId">Primary key of the student to delete.</param>
         /// <example>
-        /// DELETE: api/AuthorData/DeleteAuthor -> 1
+        /// DELETE: api/Students/DeleteStudent/1 -> 1
         /// </example>
         /// <returns>
-        /// Number of rows affected by delete operation.
+        /// The number of rows affected by the delete operation (1 if successful, 0 if unsuccessful).
         /// </returns>
         [HttpDelete(template: "DeleteStudent/{StudentId}")]
         public int DeleteStudent(int StudentId)

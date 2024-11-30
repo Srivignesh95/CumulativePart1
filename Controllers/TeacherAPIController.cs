@@ -124,23 +124,21 @@ namespace test1.Controllers
             return CurrentTeacher;
         }
         /// <summary>
-        /// Adds an author to the database
+        /// Adds a new teacher to the database.
         /// </summary>
-        /// <param name="AuthorData">Author Object</param>
+        /// <param name="TeacherData">The Teacher object containing the teacher's details.</param>
         /// <example>
-        /// POST: api/AuthorData/AddAuthor
+        /// POST: api/Teacher/AddTeacher
         /// Headers: Content-Type: application/json
         /// Request Body:
         /// {
-        ///	    "AuthorFname":"Christine",
-        ///	    "AuthorLname":"Bittle",
-        ///	    "AuthorBio":"Likes Coding!",
-        ///	    "AuthorEmail":"christine@test.ca"
-        /// } -> 409
+        ///     "Teacherfname":"John",
+        ///     "Teacherlname":"Doe",
+        ///     "Employeenumber":"T12345",
+        ///     "Hiredate":"2023-01-01",
+        ///     "Salary":50000
+        /// }
         /// </example>
-        /// <returns>
-        /// The inserted Author Id from the database if successful. 0 if Unsuccessful
-        /// </returns>
         [HttpPost(template: "AddTeacher")]
         public int AddTeacher([FromBody] Teacher TeacherData)
         {
@@ -148,6 +146,7 @@ namespace test1.Controllers
             using (MySqlConnection Connection = _context.AccessDatabase())
             {
                 Connection.Open();
+
                 //Establish a new command (query) for our database
                 MySqlCommand Command = Connection.CreateCommand();
 
@@ -169,15 +168,14 @@ namespace test1.Controllers
             return 0;
         }
         /// <summary>
-        /// Deletes an Author from the database
+        /// Deletes a teacher from the database by their ID.
         /// </summary>
-        /// <param name="AuthorId">Primary key of the author to delete</param>
+        /// <param name="TeacherId">The ID of the teacher to delete.</param>
         /// <example>
-        /// DELETE: api/AuthorData/DeleteAuthor -> 1
+        /// DELETE: api/Teacher/DeleteTeacher/5 -> 1
         /// </example>
-        /// <returns>
-        /// Number of rows affected by delete operation.
-        /// </returns>
+        /// <returns>The number of rows affected by the delete operation (1 if successful, 0 otherwise).</returns>
+
         [HttpDelete(template: "DeleteTeacher/{TeacherId}")]
         public int DeleteTeacher(int TeacherId)
         {
