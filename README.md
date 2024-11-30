@@ -1,35 +1,65 @@
 # School Management System - ASP.NET Core Web API & MVC  
 
-## 📚 Overview  
-This project is a **School Management System** built using **ASP.NET Core Web API** and **MySQL**, aimed at managing teacher records and their course assignments efficiently. It serves as a foundational project to implement **CRUD (Create, Read, Update, Delete)** operations while adhering to modern web development practices.  
+## Overview  
+This project is a **School Management System** built with **ASP.NET Core Web API** and **MySQL** to manage teacher records and their assigned courses. It provides basic functionalities for adding, retrieving, and deleting teacher records, and also for viewing which courses are assigned to teachers.
 
 ---
 
-## 🛠 Features  
+## Features  
 - **Teacher Management**  
-  - Retrieve a list of all teachers with their details.  
-  - Fetch a specific teacher by ID along with assigned courses.  
-  - Add a new teacher record.  
-  - Delete an existing teacher record.  
+  - Get a list of all teachers.
+  - Find a specific teacher by their ID, including their assigned courses.
+  - Add a new teacher.
+  - Delete an existing teacher.
 
-- **Course Association**  
-  - View course assignments for a teacher.  
-  - Handle cases where a teacher has no courses assigned.  
+- **Course Assignment**  
+  - View which courses a teacher is assigned to.
+  - Handle cases where a teacher is not assigned any courses.
 
 - **Security**  
-  - Use of parameterized queries to prevent SQL injection.  
+  - Prevent SQL injection through the use of parameterized queries.
 
 ---
 
-## 🚀 Getting Started  
+## Getting Started  
 
 ### Prerequisites  
-Ensure you have the following installed:  
-- [.NET SDK](https://dotnet.microsoft.com/download) (Version 6.0 or higher recommended)  
-- [MySQL Server](https://dev.mysql.com/downloads/)  
+Before getting started, make sure you have the following installed:
+- **.NET SDK**  
+- **MySQL Server**
 
 ### Installation Steps  
-1. **Clone the repository**:  
-   ```bash
-   git clone https://github.com/your-username/school-management-system.git
-   cd school-management-system
+1. **Clone the repository** to your local machine.
+2. **Set up the MySQL database** and update the connection string in the project.
+3. **Run the application** to start the API.
+
+---
+
+## API Endpoints  
+
+- **Get All Teachers**: Retrieves a list of all teachers.
+- **Find Teacher by ID**: Retrieves details of a specific teacher and their assigned courses.
+- **Add a Teacher**: Adds a new teacher to the database.
+- **Delete a Teacher**: Deletes a teacher by their ID.
+
+---
+
+## Technology Stack  
+- **Backend**: ASP.NET Core Web API  
+- **Database**: MySQL  
+- **Language**: C#  
+
+---
+
+## Security & Best Practices  
+- **Sanitized Inputs**: Protects the app from SQL injection using parameterized queries.
+- **Separation of Concerns**: Keeps the project organized by separating controllers, models, and database logic.
+
+---
+
+## Future Enhancements  
+- Implement the **Update functionality** for teacher records.
+- Expand the system to manage **students** and **classes**.
+- Add a **frontend interface** (e.g., using React or Angular).
+- Improve **error handling** and add **logging**.
+
