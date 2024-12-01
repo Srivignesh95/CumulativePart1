@@ -1,9 +1,8 @@
 # School Management System - ASP.NET Core Web API & MVC  
 
 ## Overview  
-This project is a **School Management System** built with **ASP.NET Core Web API** and **MySQL** to manage teacher records and their assigned courses. It provides basic functionalities for adding, retrieving, and deleting teacher records, and also for viewing which courses are assigned to teachers.
+This project is a School Management System built with ASP.NET Core Web API and MySQL to manage teacher records and their assigned courses. It provides basic functionalities for adding, retrieving, and deleting teacher records and viewing which courses are assigned to teachers. This would be the Minimum Viable Product for this assignment, which can be built upon further.
 
----
 
 ## Features  
 - **Teacher Management**  
@@ -16,50 +15,22 @@ This project is a **School Management System** built with **ASP.NET Core Web API
   - View which courses a teacher is assigned to.
   - Handle cases where a teacher is not assigned any courses.
 
-- **Security**  
-  - Prevent SQL injection through the use of parameterized queries.
 
----
+## Prerequisites  
+- .NET SDK  
+- MySQL Server
+- cURL
 
-## Getting Started  
 
-### Prerequisites  
-Before getting started, make sure you have the following installed:
-- **.NET SDK**  
-- **MySQL Server**
-
-### Installation Steps  
-1. **Clone the repository** to your local machine.
-2. **Set up the MySQL database** and update the connection string in the project.
-3. **Run the application** to start the API.
-
----
-
-## API Endpoints  
+## API Features
 
 - **Get All Teachers**: Retrieves a list of all teachers.
 - **Find Teacher by ID**: Retrieves details of a specific teacher and their assigned courses.
 - **Add a Teacher**: Adds a new teacher to the database.
 - **Delete a Teacher**: Deletes a teacher by their ID.
 
----
+## Testing
+- Testing is performed to ensure that all the key features are executed properly. Screenshots and cURL commands related to adding and deleting teacher information are provided.
 
-## Technology Stack  
-- **Backend**: ASP.NET Core Web API  
-- **Database**: MySQL  
-- **Language**: C#  
 
----
-
-## Security & Best Practices  
-- **Sanitized Inputs**: Protects the app from SQL injection using parameterized queries.
-- **Separation of Concerns**: Keeps the project organized by separating controllers, models, and database logic.
-
----
-
-## Future Enhancements  
-- Implement the **Update functionality** for teacher records.
-- Expand the system to manage **students** and **classes**.
-- Add a **frontend interface** (e.g., using React or Angular).
-- Improve **error handling** and add **logging**.
 
