@@ -63,5 +63,26 @@ namespace test1.Controllers
             }
             return RedirectToAction("List");
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Course selectedCourse = _api.FindCourse(id);
+            return View(selectedCourse);
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, string coursename, string coursecode, string startdate, string finishdate)
+        {
+            Course updatedCourse = new Course
+            {
+                Courseid = id,
+                coursename = coursename,
+                Coursecode = coursecode,
+                Startdate = startdate,
+                Finishdate = finishdate
+            };
+            _api.UpdateCourse(id, updatedCourse);
+            return RedirectToAction("Show", new { id });
+        }
     }
 }

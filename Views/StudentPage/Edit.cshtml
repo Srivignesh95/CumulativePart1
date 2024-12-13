@@ -1,0 +1,40 @@
+﻿@model test1.Models.Students
+
+<div id="containershow" class="container mt-5">
+    <nav>
+        <a class="navlink btn btn-secondary" href="/StudentPage/Show/@Model.Studentid">Back</a>
+    </nav>
+    <h2 class="my-4">Edit Student</h2>
+    <form method="POST" action="/StudentPage/Update/@Model.Studentid" class="form-group">
+        <div class="form-row mb-3">
+            <label for="Studentfname" class="col-sm-2 col-form-label">First Name:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Studentfname" name="Studentfname" class="form-control" value="@Model.Studentfname" />
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <label for="Studentlname" class="col-sm-2 col-form-label">Last Name:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Studentlname" name="Studentlname" class="form-control" value="@Model.Studentlname" />
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <label for="Studentnumber" class="col-sm-2 col-form-label">Student Number:</label>
+            <div class="col-sm-10">
+                <input type="text" id="Studentnumber" name="Studentnumber" class="form-control" value="@Model.Studentnumber" />
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <label for="Enroledate" class="col-sm-2 col-form-label">Enrollment Date:</label>
+            <div class="col-sm-10">
+                <input type="date" id="Enroledate" name="Enroledate" class="form-control"
+                       value="@(DateTime.TryParse(Model.Enroledate, out var Enroledate) ? Enroledate.ToString("yyyy-MM-dd") : "")" />
+            </div>
+        </div>
+        <div class="form-row mb-3">
+            <div class="col-sm-10">
+                <input type="submit" value="Update Student" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>

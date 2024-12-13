@@ -63,5 +63,29 @@ namespace test1.Controllers
             }
             return RedirectToAction("List");
         }
+        // GET : AuthorPage/Edit/{id}
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Teacher SelectedTeacher = _api.FindTeacher(id);
+            return View(SelectedTeacher);
+        }
+
+        // POST: AuthorPage/Update/{id}
+        [HttpPost]
+        public IActionResult Update(int id, string Teacherfname, string Teacherlname, string Employeenumber, string Hiredate, decimal Salary)
+        {
+            Teacher UpdatedTeacher = new Teacher();
+            UpdatedTeacher.Teacherfname = Teacherfname;
+            UpdatedTeacher.Teacherlname = Teacherlname;
+            UpdatedTeacher.Employeenumber = Employeenumber;
+            UpdatedTeacher.Hiredate = Hiredate;
+            UpdatedTeacher.Salary = Salary;
+
+            // not doing anything with the response
+            _api.UpdateTeacher(id, UpdatedTeacher);
+            // redirects to show author
+            return RedirectToAction("Show", new { id = id });
+        }
     }
 }

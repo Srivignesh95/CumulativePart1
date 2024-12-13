@@ -7,12 +7,14 @@
         <div class="col-md-8">
             <div class="card-body">
                 <p class="card-text"><strong>Course Name:</strong> @Model.coursename</p>
-                <p class="card-text"><strong>Course Code:</strong> @Model.Courseid </p>
+                <p class="card-text"><strong>Course Code:</strong> @Model.Coursecode </p>
                 <p class="card-text"><strong>Teacher's Code:</strong> @Model.Teacherid </p>
                 <p class="card-text"><strong>Teacher's Name:</strong> @Model.Teachername </p>
                 <p class="card-text"><strong>Start Date:</strong> @Model.Startdate </p>
                 <p class="card-text"><strong>Finish Date:</strong> @Model.Finishdate </p>
-                <a href="/CoursePage/List" class="btn btn-secondary me-2">Back to List</a> <a class="btn btn-danger" href="/CoursePage/DeleteConfirm/@Model.Courseid">Delete</a>
+                <a href="/CoursePage/List" class="btn btn-secondary me-2">Back to List</a>
+                    <a href="/CoursePage/Edit/@Model.Courseid" class="btn btn-primary me-2">Edit</a>
+                <a class="btn btn-danger" href="/CoursePage/DeleteConfirm/@Model.Courseid">Delete</a>
             </div>
         </div>
     </div>

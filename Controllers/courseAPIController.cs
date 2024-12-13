@@ -195,6 +195,42 @@ namespace test1.Controllers
             // if failure
             return 0;
         }
+        /// <summary>
+        /// Updates a Course in the database. Data is a Course object, request query contains ID
+        /// </summary>
+        /// <param name="updatedCourse">The updated Course data.</param>
+        /// <param name="id">The Course ID primary key</param>
+        /// <example>
+        /// PUT: api/Course/UpdateCourse/4
+        /// Headers: Content-Type: application/json
+        /// Request Body:
+        /// {
+        ///     "Coursename":"Updated Course",
+        ///     "Coursecode":"CS202",
+        ///     "Startdate":"2024-01-01",
+        ///     "Finishdate":"2024-06-01"
+        /// }
+        /// </example>
+        /// <returns>The updated Course object</returns>
+        [HttpPut("UpdateCourse/{id}")]
+        public Course UpdateCourse(int id, [FromBody] Course updatedCourse)
+        {
+            using (MySqlConnection connection = _context.AccessDatabase())
+            {
+                connection.Open();
+                MySqlCommand command = connection.CreateCommand();
+                command.CommandText = "UPDATE courses SET coursename = @coursename, coursecode = @coursecode, startdate = @startdate, finishdate = @finishdate WHERE courseid = @id";
+                command.Parameters.AddWithValue("@coursename", updatedCourse.coursename);
+                command.Parameters.AddWithValue("@coursecode", updatedCourse.Coursecode);
+                command.Parameters.AddWithValue("@startdate", updatedCourse.Startdate);
+                command.Parameters.AddWithValue("@finishdate", updatedCourse.Finishdate);
+                command.Parameters.AddWithValue("@id", id);
+
+                command.ExecuteNonQuery();
+            }
+
+            return FindCourse(id);
+        }
 
     }
 }

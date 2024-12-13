@@ -21,7 +21,9 @@
                         }
                     </p>
                     <p class="card-text"><small class="text-muted">Joining Date: @Model.Hiredate</small></p>
-                    <a href="/TeacherPage/List" class="btn btn-secondary me-2">Back to List</a> <a class="btn btn-danger" href="/TeacherPage/DeleteConfirm/@Model.Teacherid">Delete</a>
+                    <a href="/TeacherPage/List" class="btn btn-secondary me-2">Back to List</a>
+                    <a href="/TeacherPage/Edit/@Model.Teacherid" class="btn btn-primary me-2">Edit</a>
+                    <a class="btn btn-danger" href="/TeacherPage/DeleteConfirm/@Model.Teacherid">Delete</a>
                 </div>
             </div>
         </div>

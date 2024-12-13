@@ -19,7 +19,9 @@
                         }
                     </p>
                     <p class="card-text"><small class="text-muted">Joining Date: @Model.Enroledate</small></p>
-                    <a href="/StudentPage/List" class="btn btn-secondary me-2">Back to List</a> <a class="btn btn-danger" href="/StudentPage/DeleteConfirm/@Model.Studentid">Delete</a>
+                    <a href="/StudentPage/List" class="btn btn-secondary me-2">Back to List</a>
+                    <a href="/StudentPage/Edit/@Model.Studentid" class="btn btn-primary me-2">Edit</a>
+                    <a class="btn btn-danger" href="/StudentPage/DeleteConfirm/@Model.Studentid">Delete</a>
                 </div>
             </div>
         </div>

@@ -64,5 +64,26 @@ namespace test1.Controllers
             }
             return RedirectToAction("List");
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Students selectedStudent = _api.FindStudent(id);
+            return View(selectedStudent);
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, string Studentfname, string Studentlname, string Studentnumber, string Enroledate)
+        {
+            Students updatedStudent = new Students
+            {
+                Studentid = id,
+                Studentfname = Studentfname,
+                Studentlname = Studentlname,
+                Studentnumber = Studentnumber,
+                Enroledate = Enroledate
+            };
+            _api.UpdateStudent(id, updatedStudent);
+            return RedirectToAction("Show", new { id });
+        }
     }
 }

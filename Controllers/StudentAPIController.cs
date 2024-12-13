@@ -197,5 +197,41 @@ namespace test1.Controllers
             // if failure
             return 0;
         }
+        /// <summary>
+        /// Updates a Student in the database and returns the updated student object.
+        /// </summary>
+        /// <param name="updatedStudent">The updated student data.</param>
+        /// <param name="id">The Student ID primary key.</param>
+        /// <example>
+        /// PUT: api/Student/UpdateStudent/4
+        /// Headers: Content-Type: application/json
+        /// Request Body:
+        /// {
+        ///     "FirstName": "Updated FirstName",
+        ///     "LastName": "Updated LastName",
+        ///     "EnrollmentDate": "2024-01-01"
+        /// }
+        /// </example>
+        /// <returns>The updated Student object.</returns>
+        [HttpPut("UpdateStudent/{id}")]
+        public Students UpdateStudent(int id, [FromBody] Students updatedStudent)
+        {
+            using (MySqlConnection connection = _context.AccessDatabase())
+            {
+                connection.Open();
+                MySqlCommand command = connection.CreateCommand();
+                command.CommandText = "UPDATE students SET studentfname = @studentfname, studentlname = @studentlname, studentnumber= @studentnumber, enroldate = @enroldate WHERE studentid = @id";
+                command.Parameters.AddWithValue("@studentfname", updatedStudent.Studentfname);
+                command.Parameters.AddWithValue("@studentlname", updatedStudent.Studentlname);
+                command.Parameters.AddWithValue("@studentnumber", updatedStudent.Studentnumber);
+                command.Parameters.AddWithValue("@enroldate", updatedStudent.Enroledate);
+                command.Parameters.AddWithValue("@id", id);
+
+                command.ExecuteNonQuery();
+            }
+
+            return FindStudent(id);
+        }
+
     }
 }
