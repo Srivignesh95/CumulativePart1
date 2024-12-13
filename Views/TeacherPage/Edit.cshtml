@@ -1,46 +1,56 @@
 ﻿@model test1.Models.Teacher
-
-<div id="containershow" class="container mt-5">
-    <nav>
-        <a class="navlink btn btn-secondary" href="/TeacherPage/Show/@Model.Teacherid">Back</a>
-    </nav>
-    <h2 class="my-4">Edit Teacher</h2>
-    <form method="POST" action="/TeacherPage/Update/@Model.Teacherid" class="form-group">
-        <div class="form-row mb-3">
-            <label for="Teacherfname" class="col-sm-2 col-form-label">First Name:</label>
-            <div class="col-sm-10">
-                <input type="text" id="Teacherfname" name="Teacherfname" class="form-control" value="@Model.Teacherfname" />
+@if (@Model.Teacherid == 0)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        The teacher you are looking for is not available.
+    </div>
+    <div style="text-align: center; margin-top: 1em;">
+        <a href="/TeacherPage/List" class="btn btn-secondary">Back to List</a>
+    </div>
+}else{
+    @Model.Teacherid
+    <div id="containershow" class="container mt-5">
+        <nav>
+            <a class="navlink btn btn-secondary" href="/TeacherPage/Show/@Model.Teacherid">Back</a>
+        </nav>
+        <h2 class="my-4">Edit Teacher</h2>
+        <form method="POST" action="/TeacherPage/Update/@Model.Teacherid" class="form-group">
+            <div class="form-row mb-3">
+                <label for="Teacherfname" class="col-sm-2 col-form-label">First Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="Teacherfname" name="Teacherfname" class="form-control" value="@Model.Teacherfname" />
+                </div>
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <label for="Teacherlname" class="col-sm-2 col-form-label">Last Name:</label>
-            <div class="col-sm-10">
-                <input type="text" id="Teacherlname" name="Teacherlname" class="form-control" value="@Model.Teacherlname" />
+            <div class="form-row mb-3">
+                <label for="Teacherlname" class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="Teacherlname" name="Teacherlname" class="form-control" value="@Model.Teacherlname" />
+                </div>
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <label for="Employeenumber" class="col-sm-2 col-form-label">Employee Number:</label>
-            <div class="col-sm-10">
-                <input type="text" id="Employeenumber" name="Employeenumber" class="form-control" value="@Model.Employeenumber" />
+            <div class="form-row mb-3">
+                <label for="Employeenumber" class="col-sm-2 col-form-label">Employee Number:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="Employeenumber" name="Employeenumber" class="form-control" value="@Model.Employeenumber" />
+                </div>
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <label for="Salary" class="col-sm-2 col-form-label">Salary:</label>
-            <div class="col-sm-10">
-                <textarea id="Salary" name="Salary" class="form-control">@Model.Salary</textarea>
+            <div class="form-row mb-3">
+                <label for="Salary" class="col-sm-2 col-form-label">Salary:</label>
+                <div class="col-sm-10">
+                    <textarea id="Salary" name="Salary" class="form-control">@Model.Salary</textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <label for="Hiredate" class="col-sm-2 col-form-label">Hire Date:</label>
-            <div class="col-sm-10">
-                <input type="date" id="Hiredate" name="Hiredate" class="form-control"
-                       value="@(DateTime.TryParse(Model.Hiredate, out var parsedDate) ? parsedDate.ToString("yyyy-MM-dd") : "")" />
+            <div class="form-row mb-3">
+                <label for="Hiredate" class="col-sm-2 col-form-label">Hire Date:</label>
+                <div class="col-sm-10">
+                    <input type="date" id="Hiredate" name="Hiredate" class="form-control"
+                           value="@(DateTime.TryParse(Model.Hiredate, out var parsedDate) ? parsedDate.ToString("yyyy-MM-dd") : "")" />
+                </div>
             </div>
-        </div>
-        <div class="form-row mb-3">
-            <div class="col-sm-10">
-                <input type="submit" value="Update Teacher" class="btn btn-primary" />
+            <div class="form-row mb-3">
+                <div class="col-sm-10">
+                    <input type="submit" value="Update Teacher" class="btn btn-primary" />
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+}

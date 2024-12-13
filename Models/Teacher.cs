@@ -9,5 +9,6 @@
         public string Hiredate { get; set; }
         public decimal Salary { get; set; }
         public List<Course> Coursename { get; set; } = new List<Course>();
+
     }
 }

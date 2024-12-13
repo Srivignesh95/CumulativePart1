@@ -1,4 +1,26 @@
 ﻿@model IEnumerable<test1.Models.Teacher>
+
+@{
+    ViewData["Title"] = "Search Teachers by Hire Date";
+}
+
+<h2>Search Teachers by Hire Date</h2>
+
+<form method="get" asp-controller="TeacherPage" asp-action="SearchByHireDate" class="row g-3">
+    <div class="col-md-6">
+        <label for="minDate" class="form-label">Start Date:</label>
+        <input type="date" id="minDate" name="minDate" class="form-control" required />
+    </div>
+    <div class="col-md-6">
+        <label for="maxDate" class="form-label">End Date:</label>
+        <input type="date" id="maxDate" name="maxDate" class="form-control" required />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+
 <h2 style="text-align:center;margin-bottom:2em;margin-top:2em;"> Teachers Details</h2>
 <a style="margin-bottom:10px;" href="/TeacherPage/new" class="btn btn-primary">Add Teacher</a>
 <table class="table table-striped">

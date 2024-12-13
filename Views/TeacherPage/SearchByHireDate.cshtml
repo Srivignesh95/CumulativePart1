@@ -1,0 +1,36 @@
+﻿@model List<Teacher>
+
+<h2 style="text-align:center;margin-bottom:2em;margin-top:2em;">Teachers Hired Between @ViewData["MinDate"] and @ViewData["MaxDate"]</h2>
+
+@if (Model.Count == 0)
+{
+    <p>No teachers found for the specified date range.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope ="col">Teacher's Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Employee Number</th>
+                <th scope="col">Hire Date</th>
+                <th scope="col">Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var teacher in Model)
+            {
+                <tr>
+                    <td>@teacher.Teacherid</td>
+                    <td>@teacher.Teacherfname</td>
+                    <td>@teacher.Teacherlname</td>
+                    <td>@teacher.Employeenumber</td>
+                    <td>@teacher.Hiredate</td>
+                    <td>@teacher.Salary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

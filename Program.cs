@@ -1,3 +1,4 @@
+using MySqlX.XDevAPI;
 using test1.Controllers;
 using test1.Models;
 
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
 
 // Swagger API help pages
 builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +35,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.UseSwagger();

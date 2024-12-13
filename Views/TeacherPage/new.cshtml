@@ -3,7 +3,7 @@
         <a class="btn btn-primary" href="/TeacherPage/List">Back To Teachers</a>
     </nav>
     <h2 class="mb-4">New Teacher</h2>
-    <form method="POST" action="/TeacherPage/Create">
+    <form method="POST" action="/TeacherPage/Create" id="teacherForm">
         <div class="row mb-3">
             <label for="Teacherfname" class="col-sm-2 col-form-label">First Name:</label>
             <div class="col-sm-10">
@@ -20,6 +20,9 @@
             <label for="Employeenumber" class="col-sm-2 col-form-label">Employee Number:</label>
             <div class="col-sm-10">
                 <input type="text" id="Employeenumber" name="Employeenumber" class="form-control" placeholder="Enter employee number" />
+                <span id="employeeNumberError" class="text-danger" style="display: none;">
+                    Invalid Employee Number. It must start with "T" followed by digits.
+                </span>
             </div>
         </div>
         <div class="row mb-3">
@@ -41,3 +44,17 @@
         </div>
     </form>
 </div>
+<script>
+    // JavaScript for Employee Number Validation
+    document.getElementById("teacherForm").addEventListener("submit", function (e) {
+        const employeeNumber = document.getElementById("Employeenumber").value;
+        const regex = /^T\d+$/; // Regex for "T" followed by digits
+
+        if (!regex.test(employeeNumber)) {
+            e.preventDefault(); // Prevent form submission
+            document.getElementById("employeeNumberError").style.display = "block";
+        } else {
+            document.getElementById("employeeNumberError").style.display = "none";
+        }
+    });
+</script>
