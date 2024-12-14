@@ -213,8 +213,12 @@ namespace test1.Controllers
         /// </example>
         /// <returns>The updated Course object</returns>
         [HttpPut("UpdateCourse/{id}")]
-        public Course UpdateCourse(int id, [FromBody] Course updatedCourse)
+        public IActionResult UpdateCourse(int id, [FromBody] Course updatedCourse)
         {
+            if (string.IsNullOrEmpty(updatedCourse.Coursecode) || string.IsNullOrEmpty(updatedCourse.Startdate) || string.IsNullOrEmpty(updatedCourse.Finishdate))
+            {
+                return BadRequest(new { Message = "Missing required fields for course update." });
+            }
             using (MySqlConnection connection = _context.AccessDatabase())
             {
                 connection.Open();
@@ -229,7 +233,7 @@ namespace test1.Controllers
                 command.ExecuteNonQuery();
             }
 
-            return FindCourse(id);
+            return Ok(new { Message = "Course updated successfully." });
         }
 
     }

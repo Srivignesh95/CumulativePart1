@@ -1,7 +1,11 @@
-﻿namespace test1.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace test1.Models
 {
     public class Course
     {
+        [JsonIgnore]
         public int Courseid { get; set; }
         public string Coursecode { get; set; }
         public int Teacherid { get; set; }

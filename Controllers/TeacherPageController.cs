@@ -94,31 +94,6 @@ namespace test1.Controllers
             return View(SelectedTeacher);
         }
 
-        // POST: AuthorPage/Update/{id}
-        [HttpPost]
-        public IActionResult Update(int id, string Teacherfname, string Teacherlname, string Employeenumber, string Hiredate, decimal Salary)
-        {
-            int teacher = Convert.ToInt32(_api.FindTeacher(id)); // Ensure `FindTeacher` correctly queries the database.
 
-            Teacher UpdatedTeacher = new Teacher();
-            UpdatedTeacher.Teacherfname = Teacherfname;
-            UpdatedTeacher.Teacherlname = Teacherlname;
-            UpdatedTeacher.Employeenumber = Employeenumber;
-            UpdatedTeacher.Hiredate = Hiredate;
-            UpdatedTeacher.Salary = Salary;
-
-            // not doing anything with the response
-            IActionResult response = _api.UpdateTeacher(id, UpdatedTeacher);
-            // redirects to show author
-            if (response is OkObjectResult)
-            {
-                // Redirect to the details page of the updated teacher
-                return RedirectToAction("Show", new { id = id });
-            }
-
-            // Handle unexpected scenarios
-            TempData["Error"] = "An unexpected error occurred.";
-            return RedirectToAction("Edit", new { id = id });
-        }
     }
 }

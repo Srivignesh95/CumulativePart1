@@ -124,7 +124,37 @@ namespace test1.Controllers
             //Return the final list of author names
             return CurrentTeacher;
         }
-        
+        /// <summary>
+        /// Retrieves a list of teachers who were hired within a specified date range.
+        /// </summary>
+        /// <param name="minDate">The start date of the hire date range.</param>
+        /// <param name="maxDate">The end date of the hire date range.</param>
+        /// <example>
+        /// GET api/Teacher/FindTeachersByHireDate?minDate=2023-01-01&maxDate=2023-12-31
+        /// -> 
+        /// [
+        ///     {
+        ///         "Teacherid": 1,
+        ///         "Teacherfname": "John",
+        ///         "Teacherlname": "Doe",
+        ///         "Employeenumber": "T123",
+        ///         "Hiredate": "2023-03-15",
+        ///         "Salary": 50000
+        ///     },
+        ///     {
+        ///         "Teacherid": 2,
+        ///         "Teacherfname": "Jane",
+        ///         "Teacherlname": "Smith",
+        ///         "Employeenumber": "T124",
+        ///         "Hiredate": "2023-06-01",
+        ///         "Salary": 55000
+        ///     }
+        /// ]
+        /// </example>
+        /// <returns>
+        /// A list of <see cref="Teacher"/> objects representing teachers hired within the specified date range.
+        /// </returns>
+
         [HttpGet(template: "FindTeachersByHireDate")]
         public List<Teacher> FindTeachersByHireDate(DateTime minDate, DateTime maxDate)
         {
@@ -265,30 +295,42 @@ namespace test1.Controllers
             return 0;
         }
         /// <summary>
-        /// Updates an Author in the database. Data is Author object, request query contains ID
+        /// Updates a teacher's details in the database based on the provided teacher ID.
         /// </summary>
-        /// <param name="AuthorData">Author Object</param>
-        /// <param name="AuthorId">The Author ID primary key</param>
+        /// <param name="TeacherId">The ID of the teacher to update.</param>
+        /// <param name="TeacherData">The updated teacher object containing new details.</param>
         /// <example>
-        /// PUT: api/Author/UpdateAuthor/4
+        /// PUT: api/Teacher/UpdateTeacher/3
         /// Headers: Content-Type: application/json
         /// Request Body:
         /// {
-        ///	    "AuthorFname":"Christine",
-        ///	    "AuthorLname":"Bittle",
-        ///	    "AuthorBio":"Likes Coding!",
-        ///	    "AuthorEmail":"christine@test.ca"
-        /// } -> 
+        ///     "Teacherfname": "John",
+        ///     "Teacherlname": "Doe",
+        ///     "Employeenumber": "T12345",
+        ///     "Hiredate": "2023-01-01",
+        ///     "Salary": 55000
+        /// }
+        /// Response (200 OK):
         /// {
-        ///     "AuthorId":4,
-        ///	    "AuthorFname":"Christine",
-        ///	    "AuthorLname":"Bittle",
-        ///	    "AuthorBio":"Likes Coding!",
-        ///	    "AuthorEmail":"christine@test.ca"
+        ///     "Message": "Teacher updated successfully."
+        /// }
+        /// 
+        /// Response (404 Not Found):
+        /// {
+        ///     "Message": "The teacher you are trying to update does not exist."
+        /// }
+        /// 
+        /// Response (500 Internal Server Error):
+        /// {
+        ///     "Message": "An unexpected error occurred.",
+        ///     "Details": "Error details if available"
         /// }
         /// </example>
         /// <returns>
-        /// The updated Author object
+        /// A status code indicating the result of the update operation:
+        /// - 200 OK: If the teacher is successfully updated.
+        /// - 404 Not Found: If the teacher ID does not exist in the database.
+        /// - 500 Internal Server Error: If an unexpected error occurs.
         /// </returns>
         [HttpPut(template: "UpdateTeacher/{TeacherId}")]
         public IActionResult UpdateTeacher(int TeacherId, [FromBody] Teacher TeacherData)
